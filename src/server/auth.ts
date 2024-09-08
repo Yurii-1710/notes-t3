@@ -6,6 +6,8 @@ import {
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
 import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials"
 
 import { env } from "~/env";
 import { db } from "~/server/db";
@@ -52,6 +54,21 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+    }),
+    // Credentials({
+    //   credentials: {
+    //     username: { label: "Username" },
+    //     password: { label: "Password", type: "password" },
+    //   },
+    //   async authorize({ request }) {
+    //     const response = await fetch(request)
+    //     if (!response.ok) return null
+    //     return (await response.json()) ?? null
+    //   },
+    
     /**
      * ...add more providers here.
      *
